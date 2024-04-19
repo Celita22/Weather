@@ -1,0 +1,92 @@
+.principal {
+    background-color: #f8f9fa;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+#pesquisa {
+    padding: 10px;
+    border-radius: 30px;
+    width: 600px;
+}
+
+.fa-search {
+    position: absolute;
+    right: 10px;
+    color: #555;
+}
+
+#ligarDesligar {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100px;
+    border-radius: 30px;
+ 
+}
+.btn-warning {
+    width: 200px;
+    border-radius: 30px;
+}
+.btn-primary, .btn-warning {
+    margin-right: 5px;
+    font-size: 24px;
+    padding: 10px 20px;
+    margin: 40px;
+    
+}
+.primeira{
+    Width: 400px;
+    height:200px;
+    margin: 10px;
+    Left:80px;
+    border-radius: 30px;
+    background-color:#f8f9fa;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+
+}
+.terceira{
+  
+    Width: 300px;
+    height:230px;
+    margin: 10px;
+    Left:80px;
+    border-radius: 30px;
+    background-color: #f8f9fa;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.segunda{
+  
+    Width: 600px;
+    height:200px;
+    margin: 10px;
+    Left:80px;
+    border-radius: 30px;
+    background-color: #f8f9fa;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+ 
+}
+.icone-modo {
+    color: #ffd700; /* Cor do sol */
+}
+.quarta{
+  
+    Width: 700px;
+    height:230px;
+    margin: 10px;
+    Left:80px;
+    border-radius: 30px;
+    background-color: #f8f9fa;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+ 
+}
