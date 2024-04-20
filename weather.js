@@ -8,9 +8,17 @@ const climaCards = document.querySelector(".clima-cards");
 
 const diasDaSemana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
 let _latitude, _longitude
-function pegarCoordenadasUsuario() {
+function pegarCoordenadasUsuario(value) {
+
     navigator.geolocation.getCurrentPosition(localizacao => {
         var { latitude, longitude } = localizacao.coords;
+        var url = new URL(window.location.href);
+        var lat = url.searchParams.get('lat');
+        var lon = url.searchParams.get('lon');
+        if(lat !== null && lon !== null && value == false){
+            latitude = lat;
+            longitude = lon;
+        }
         const API_URL = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_CHAVE}`;
         fetch(API_URL).then(response => response.json()).then(dados => {
             if (dados.length == 0) {
@@ -18,7 +26,6 @@ function pegarCoordenadasUsuario() {
                 return;
             }
             var { name } = dados[0];
-            console.log(dados);
             buscarDetalhesTempo(name, latitude, longitude);
         }).catch(() => {
             alert("Algum erro");
@@ -27,22 +34,10 @@ function pegarCoordenadasUsuario() {
 }
 
 function buscarDetalhesTempo(nomeCidade, latitude, longitude) {
-    var url = new URL(window.location.href);
-
-    var lat = url.searchParams.get('lat');
-    var lon = url.searchParams.get('lon');
-
-    
-    if(lat !==null && lon !== null){
-        latitude = lat;
-        longitude = lon
-    }
-
+   
     _latitude = latitude;
     _longitude = longitude
-   
     const CLIMA_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=pt&appid=${API_CHAVE}`;
-
     fetch(CLIMA_API_URL).then(response => response.json()).then(dados => {
         const atualProximosDias = [];
         var days = [];
@@ -67,10 +62,11 @@ function buscarDetalhesTempo(nomeCidade, latitude, longitude) {
                 climaCards.insertAdjacentHTML("beforeend", html);
             }
         });
+        const novaURL = `https://celita22.github.io/Weather/?lat=${_latitude}&lon=${_longitude}`;
+        window.history.pushState({ path: novaURL }, '', novaURL);
     }).catch(() => {
         alert("Algum erro");
     });
-
 }
 
 function criarCardClima(cidade, item, index, dias) {
@@ -97,8 +93,6 @@ function criarCardClima(cidade, item, index, dias) {
                 <h6>Humidade:${(item.main.humidity)}%</h6>
       </div>`;
     }
-
-
 }
 function dadosCidade() {
     var nomeCidade = cidade.value;
@@ -119,9 +113,8 @@ function dadosCidade() {
         alert("Algum erro");
     });
 }
-
 function partilharPrevisao(){
-    const linkCompartilhado = `https://celita22.github.io/Weather/?lat=${_latitude}&long=${_longitude}`;
+    const linkCompartilhado = `https://celita22.github.io/Weather/?lat=${_latitude}&lon=${_longitude}`;
     Swal.fire({
         title: "<span style='color: white; font-weight: bold;'>Partilhar Previsão de Tempo</span>",
         html: "<span style='color: white; font-weight: bold;'>" + linkCompartilhado + "</span>",
@@ -150,6 +143,9 @@ function partilharPrevisao(){
 }
 
 pesquisar.addEventListener("click", dadosCidade);
-localizaoAtual.addEventListener("click", pegarCoordenadasUsuario)
+localizaoAtual.addEventListener("click", () => {
+    pegarCoordenadasUsuario(true)
+});
 partilhar.addEventListener("click", partilharPrevisao)
-pegarCoordenadasUsuario();
+pegarCoordenadasUsuario(false);
+
