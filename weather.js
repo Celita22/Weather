@@ -27,8 +27,8 @@ function pegarCoordenadasUsuario(value) {
             }
             var { name } = dados[0];
             buscarDetalhesTempo(name, latitude, longitude);
-        }).catch(() => {
-            alert("Algum erro");
+        }).catch((error) => {
+            console.log(error)
         });
     })
 }
@@ -64,8 +64,8 @@ function buscarDetalhesTempo(nomeCidade, latitude, longitude) {
         });
         const novaURL = `https://celita22.github.io/Weather/?lat=${_latitude}&lon=${_longitude}`;
         window.history.pushState({ path: novaURL }, '', novaURL);
-    }).catch(() => {
-        alert("Algum erro");
+    }).catch((error) => {
+       console.log(error)
     });
 }
 
@@ -106,11 +106,10 @@ function dadosCidade() {
             return;
         }
         var { lat, lon, name } = dados[0];
-       
         buscarDetalhesTempo(name, lat, lon);
 
-    }).catch(() => {
-        alert("Algum erro");
+    }).catch((error) => {
+        console.log(error)
     });
 }
 function partilharPrevisao(){
