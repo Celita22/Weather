@@ -120,12 +120,13 @@ h1 {
   gap: 20px;
 }
 .clima-cards .card {
-  opacity: 50%;
+  opacity: 70%;
   color: #fff;
   padding: 18px 16px;
   list-style: none;
   width: calc(100% / 5);
   background: #6C757D;
+  text-transform: capitalize;
   border-radius: 5px;
 }
 .clima-cards .card h3 {
