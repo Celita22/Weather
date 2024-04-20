@@ -1,12 +1,13 @@
 const API_CHAVE = "495de84d4964370a1a9c1a9991578169";
 const cidade = document.querySelector(".city-input");
 const pesquisar = document.querySelector(".search-btn");
+const partilhar = document.querySelector(".share-btn");
 const localizaoAtual = document.querySelector(".location-btn");
 const tempoAtual = document.querySelector(".clima-atual");
 const climaCards = document.querySelector(".clima-cards");
 
 const diasDaSemana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
-
+let _latitude, _longitude
 function pegarCoordenadasUsuario() {
     navigator.geolocation.getCurrentPosition(localizacao => {
         var { latitude, longitude } = localizacao.coords;
@@ -19,18 +20,27 @@ function pegarCoordenadasUsuario() {
             var { name } = dados[0];
             console.log(dados);
             buscarDetalhesTempo(name, latitude, longitude);
-
-
         }).catch(() => {
             alert("Algum erro");
         });
-
     })
-
 }
 
 function buscarDetalhesTempo(nomeCidade, latitude, longitude) {
+    var url = new URL(window.location.href);
 
+    var lat = url.searchParams.get('lat');
+    var lon = url.searchParams.get('lon');
+
+    
+    if(lat !==null && lon !== null){
+        latitude = lat;
+        longitude = lon
+    }
+
+    _latitude = latitude;
+    _longitude = longitude
+   
     const CLIMA_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=pt&appid=${API_CHAVE}`;
 
     fetch(CLIMA_API_URL).then(response => response.json()).then(dados => {
@@ -102,15 +112,44 @@ function dadosCidade() {
             return;
         }
         var { lat, lon, name } = dados[0];
+       
         buscarDetalhesTempo(name, lat, lon);
 
     }).catch(() => {
         alert("Algum erro");
     });
-
 }
 
+function partilharPrevisao(){
+    const linkCompartilhado = `https://celita22.github.io/Weather/?lat=${_latitude}&long=${_longitude}`;
+    Swal.fire({
+        title: "<span style='color: white; font-weight: bold;'>Partilhar Previsão de Tempo</span>",
+        html: "<span style='color: white; font-weight: bold;'>" + linkCompartilhado + "</span>",
+        showDenyButton: true,
+        confirmButtonText: "<span style='color: white; font-weight: bold;'>Copiar Link</span>",
+        denyButtonText: "<span style='color: white; font-weight: bold;'>Voltar</span>",
+        background: `url('https://i.gifer.com/fyDi.gif') no-repeat`, 
+        customClass: {
+            title: 'swal-text-white',
+            content: 'swal-text-white',
+            actions: 'swal-text-white',
+            confirmButton: 'swal-button-green',
+            denyButton: 'swal-button-red',
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            navigator.clipboard.writeText(linkCompartilhado).then(() => {
+                Swal.fire("Link copiado com sucesso!", "", "success");
+            }).catch(err => {
+                console.error('Erro ao copiar o link:', err);
+            });
+        }
+    });
+    
+    
+}
 
 pesquisar.addEventListener("click", dadosCidade);
 localizaoAtual.addEventListener("click", pegarCoordenadasUsuario)
+partilhar.addEventListener("click", partilharPrevisao)
 pegarCoordenadasUsuario();

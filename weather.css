@@ -14,6 +14,17 @@ body {
 }
 
 
+
+.swal-button-green {
+  background-color:#157A6E !important;
+  color: white !important; 
+}
+
+.swal-button-red {
+  background-color: rgb(243, 1, 1) !important; 
+  color: white !important; 
+}
+
 h1 {
   opacity: 100%;
   font-size: 1.75rem;
