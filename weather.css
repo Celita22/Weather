@@ -13,6 +13,7 @@ body {
   background-size: cover;
 }
 
+
 h1 {
   opacity: 100%;
   font-size: 1.75rem;
@@ -88,13 +89,16 @@ h1 {
   background: #5c636a;
 }
 
+.clima-input .share-btn:hover {
+  background: #31353a;
+}
 .clima-input .location-btn {
   background: #6C757D;
 }
 
 
 .clima-input .location-btn:hover {
-  background: #5c636a;
+  background: #31353a;
 }
 
 .clima-dados {

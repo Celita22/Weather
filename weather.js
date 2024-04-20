@@ -110,6 +110,7 @@ function dadosCidade() {
 
 }
 
+
 pesquisar.addEventListener("click", dadosCidade);
 localizaoAtual.addEventListener("click", pegarCoordenadasUsuario)
 pegarCoordenadasUsuario();
