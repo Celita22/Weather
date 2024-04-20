@@ -84,9 +84,14 @@ h1 {
   background: #096358;
 }
 
+.clima-input .share-btn {
+  background: #5c636a;
+}
+
 .clima-input .location-btn {
   background: #6C757D;
 }
+
 
 .clima-input .location-btn:hover {
   background: #5c636a;
