@@ -61,8 +61,8 @@ function buscarDetalhesTempo(nomeCidade, latitude, longitude) {
                 climaCards.insertAdjacentHTML("beforeend", html);
             }
         });
-        const novaURL = `http://celita22.github.io/Weather/?lat=${_latitude}&lon=${_longitude}`;
-        window.location.href = novaURL;
+        const novaURL = `?lat=${_latitude}&lon=${_longitude}`;
+        window.history.pushState({}, '', novaURL);
     }).catch((error) => {
        console.log(error)
     });
