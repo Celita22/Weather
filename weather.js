@@ -15,7 +15,7 @@ function pegarCoordenadasUsuario(value) {
         var url = new URL(window.location.href);
         var lat = url.searchParams.get('lat');
         var lon = url.searchParams.get('lon');
-        if(lat !== null && lon !== null && value == false){
+        if (lat !== null && lon !== null && value == false) {
             latitude = lat;
             longitude = lon;
         }
@@ -34,7 +34,7 @@ function pegarCoordenadasUsuario(value) {
 }
 
 function buscarDetalhesTempo(nomeCidade, latitude, longitude) {
-   
+
     _latitude = latitude;
     _longitude = longitude
     const CLIMA_API_URL = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=pt&appid=${API_CHAVE}`;
@@ -44,7 +44,7 @@ function buscarDetalhesTempo(nomeCidade, latitude, longitude) {
         const fiveDaysForecast = dados.list.filter(forecast => {
             const forecastDate = new Date(forecast.dt_txt).getDate();
             var dia = new Date(forecast.dt_txt).getDay();
-           if (!atualProximosDias.includes(forecastDate)) {
+            if (!atualProximosDias.includes(forecastDate)) {
                 days.push(diasDaSemana[dia]);
                 return atualProximosDias.push(forecastDate);
             }
@@ -52,9 +52,9 @@ function buscarDetalhesTempo(nomeCidade, latitude, longitude) {
         cidade.value = "";
         tempoAtual.innerHTML = "";
         climaCards.innerHTML = "";
-
+        const pais = dados.city.country;
         fiveDaysForecast.forEach((item, index) => {
-            const html = criarCardClima(nomeCidade, item, index, days);
+            const html = criarCardClima(nomeCidade, pais, item, index, days);
             if (index === 0) {
                 tempoAtual.insertAdjacentHTML("beforeend", html);
             } else {
@@ -64,14 +64,16 @@ function buscarDetalhesTempo(nomeCidade, latitude, longitude) {
         const novaURL = `?lat=${_latitude}&lon=${_longitude}`;
         window.history.pushState({}, '', novaURL);
     }).catch((error) => {
-       console.log(error)
+        console.log(error)
     });
 }
 
-function criarCardClima(cidade, item, index, dias) {
+function criarCardClima(cidade, pais, item, index, dias) {
     if (index == 0) {
+
         return `<div class="details">
-                    <h2>${cidade}</h2>
+                    <img src="https://flagsapi.com/${pais}/flat/32.png">
+                    <h2>${cidade}, ${pais}</h2>
                     <h6>Temperatura: ${(item.main.temp - 273.15).toFixed(2)}°C</h6>
                     <h6>Ventania:${(item.wind.speed)} m/s</h6>
                     <h6>Humidade:${(item.main.humidity)}%</h6>
@@ -111,7 +113,7 @@ function dadosCidade() {
         console.log(error)
     });
 }
-function partilharPrevisao(){
+function partilharPrevisao() {
     const linkCompartilhado = `http://celita22.github.io/Weather/?lat=${_latitude}&lon=${_longitude}`;
     Swal.fire({
         title: "<span style='color: white; font-weight: bold;'>Partilhar Previsão de Tempo</span>",
@@ -119,7 +121,7 @@ function partilharPrevisao(){
         showDenyButton: true,
         confirmButtonText: "<span style='color: white; font-weight: bold;'>Copiar Link</span>",
         denyButtonText: "<span style='color: white; font-weight: bold;'>Voltar</span>",
-        background: `url('http://i.gifer.com/fyDi.gif') no-repeat`, 
+        background: `url('http://i.gifer.com/fyDi.gif') no-repeat`,
         customClass: {
             title: 'swal-text-white',
             content: 'swal-text-white',
@@ -136,8 +138,8 @@ function partilharPrevisao(){
             });
         }
     });
-    
-    
+
+
 }
 
 pesquisar.addEventListener("click", dadosCidade);

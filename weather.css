@@ -16,13 +16,13 @@ body {
 
 
 .swal-button-green {
-  background-color:#157A6E !important;
-  color: white !important; 
+  background-color: #157A6E !important;
+  color: white !important;
 }
 
 .swal-button-red {
-  background-color: rgb(243, 1, 1) !important; 
-  color: white !important; 
+  background-color: rgb(243, 1, 1) !important;
+  color: white !important;
 }
 
 h1 {
@@ -103,6 +103,7 @@ h1 {
 .clima-input .share-btn:hover {
   background: #31353a;
 }
+
 .clima-input .location-btn {
   background: #6C757D;
 }
