@@ -84,6 +84,7 @@ h1 {
 }
 .clima-dados .clima-atual {
   color: #fff;
+  opacity: 70%;
   background: #096358;
   border-radius: 5px;
   padding: 20px 70px 20px 20px;
