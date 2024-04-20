@@ -7,10 +7,12 @@
   font-family: 'Open Sans', sans-serif;
 }
 body {
-  background: radial-gradient(#096358, #157A6E, #5c636a);
+  background-image: url('https://i.gifer.com/PbVE.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 h1 {
-  background: #157A6E;
+  opacity: 100%;
   font-size: 1.75rem;
   text-align: center;
   padding: 18px 0;
@@ -152,6 +154,7 @@ h1 {
     width: calc(100% / 3 - 15px);
   }
 }
+
 @media (max-width: 950px) {
   .clima-input {
     width: 450px;
