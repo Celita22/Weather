@@ -39,14 +39,14 @@ function buscarDetalhesTempo(nomeCidade, latitude, longitude) {
     _longitude = longitude
     const CLIMA_API_URL = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=pt&appid=${API_CHAVE}`;
     fetch(CLIMA_API_URL).then(response => response.json()).then(dados => {
-        const atualProximosDias = [];
+        const uniqueNextFiveDays = [];
         var days = [];
         const fiveDaysForecast = dados.list.filter(forecast => {
             const forecastDate = new Date(forecast.dt_txt).getDate();
             var dia = new Date(forecast.dt_txt).getDay();
-            if (!atualProximosDias.includes(forecastDate)) {
+            if (uniqueNextFiveDays.includes(forecastDate) == false) {
                 days.push(diasDaSemana[dia]);
-                return atualProximosDias.push(forecastDate);
+                return uniqueNextFiveDays.push(forecastDate);
             }
         });
         cidade.value = "";

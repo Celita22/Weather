@@ -9,14 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <script src="weather.js" defer></script>
+    <script src="alert.js" defer></script>
 </head>
 
 <body>
-    <div class="topo">
-        <h1>Previsão de tempo</h1>
+    <div class="navbar">
+        <div class="navbar-right">
+            <div class="dropdown">
+                <button class="dropbtn"><i class="fas fa-bell"></i><sup style="color: rgb(255, 0, 0);">3</sup></button>
+                <div class="dropdown-content">
+                    <a href="#">Teste 1</a>
+                    <a href="#">Teste 2</a>
+                    <a href="#">Teste 3</a>
+                </div>
+            </div>
+        </div>
     </div>
+    <h1>Previsão de tempo</h1>
     <div class="container">
-
         <div class="clima-input">
             <input class="city-input" type="text" placeholder="Digite o nome da cidade">
             <button class="search-btn">Pesquisar&nbsp;<i class="fa fa-search" aria-hidden="true"></i></button>
@@ -37,7 +47,7 @@
                 </div>
             </div>
             <div class="clima-dias">
-                <h2>Próximos 5 dias</h2>
+                <h2>Próximos dias</h2>
                 <div class="clima-cards">
                     <!-- Primeiro -->
                     <div class="card">
