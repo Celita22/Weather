@@ -182,7 +182,7 @@ function condicoesSeveras() {
             quantidadeAlertas.innerHTML = "0"
             let alertCount = 0;
             previsaoProximosCincoDias.forEach((dadosMeteorologicos, indice) => {
-                const temperatura = dadosMeteorologicos.main.temp;
+                const temperatura = (dadosMeteorologicos.main.temp - 273.15).toFixed(2);
                 const velocidadeVento = dadosMeteorologicos.wind.speed;
                 const chuvaPorHora = dadosMeteorologicos.rain ? dadosMeteorologicos.rain['1h'] || 0 : 0;
                 const chuvaDiaria = dadosMeteorologicos.rain ? dadosMeteorologicos.rain['3h'] || 0 : 0;
