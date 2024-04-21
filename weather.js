@@ -190,7 +190,6 @@ function condicoesSeveras() {
                 const raios = dadosMeteorologicos.lightning ? dadosMeteorologicos.lightning['1h'] || 0 : 0;
                 const granizo = dadosMeteorologicos.hail ? dadosMeteorologicos.hail['1h'] || 0 : 0;
                 const visibilidade = dadosMeteorologicos.visibility || 0;
-
                 if (temperatura > limiteTemperatura) {
                     alerts.insertAdjacentHTML('beforeend', `
                                     <a>${diasDaSemana[indice]}: Calor extremo detectado!,  tempo de previsão: ${dadosMeteorologicos.dt_txt.split(" ")[1]} </a>
@@ -242,6 +241,9 @@ function condicoesSeveras() {
                 }
                 quantidadeAlertas.innerHTML = alertCount
             });
+            if (alerts.innerHTML.length == 0) {
+                alerts.innerHTML = "<a>Fique tranquilo, não há previsão de climas devastadores nos próximos 5 dias</a>";
+            }
         }).catch((error) => {
             console.log(error)
         });
